@@ -38,11 +38,11 @@ macro_rules! define_into_argument_for_scalar {
             }
         }
 
-        impl $crate::IntoArgument<Option<$inner>> for &$inner {
-            fn into_argument(self) -> Option<$inner> {
-                Some(self.clone())
-            }
-        }
+        // impl $crate::IntoArgument<Option<$inner>> for &$inner {
+        //     fn into_argument(self) -> Option<$inner> {
+        //         Some(self.clone())
+        //     }
+        // }
     };
 }
 

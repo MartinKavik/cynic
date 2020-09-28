@@ -131,14 +131,29 @@ impl SelectorFunction {
                 let optional_arg_names = optional_arguments.iter().map(|arg| &arg.argument_name);
                 let optional_arg_exprs = optional_arguments.iter().map(|arg| &arg.expr);
 
+                let (inner_selection_tokens_declaration, inner_selection_tokens_declaration_argument)
+                    = if inner_selection_tokens.is_empty() { 
+                        (quote! {}, quote! {})
+                    } else {
+                        (quote! {
+                            let inner_selection_tokens = #inner_selection_tokens;
+                        },
+                            quote! {
+                            inner_selection_tokens
+                        })
+                    };
+
                 quote! {
-                    #type_path(
-                        #(#required_arguments, )*
-                    )
-                    #(
-                        .#optional_arg_names(#optional_arg_exprs)
-                    )*
-                    .select(#inner_selection_tokens)
+                    {
+                        #inner_selection_tokens_declaration
+                        #type_path(
+                            #(#required_arguments, )*
+                        )
+                        #(
+                            .#optional_arg_names(#optional_arg_exprs)
+                        )*
+                        .select(#inner_selection_tokens_declaration_argument)
+                    }
                 }
             }
             SelectorFunction::Opt(inner) => inner.to_call(
