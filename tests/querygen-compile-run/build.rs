@@ -229,25 +229,25 @@ impl Schema {
         Schema {
             query_url: query_url.into(),
             path_for_loading: path.clone(),
-            path_for_generated_code: PathBuf::from("./..").join(path),
+            path_for_generated_code: PathBuf::from("./../").join(path),
         }
     }
 
     /// Constructs a SchemaPath from this package
     fn from_test_schemas(query_url: impl Into<String>, path: impl Into<PathBuf>) -> Schema {
-        let test_schema_path = PathBuf::from("tests/schemas");
+        let test_schema_path = PathBuf::from("tests/schemas/");
         let path = test_schema_path.join(path.into());
         Schema {
             query_url: query_url.into(),
             path_for_loading: path.clone(),
-            path_for_generated_code: PathBuf::from("./../../../tests/querygen-compile-run")
+            path_for_generated_code: PathBuf::from("./../../../tests/querygen-compile-run/")
                 .join(path),
         }
     }
 
     /// Constructs a SchemaPath from this package
     fn from_querygen_tests(query_url: impl Into<String>, path: impl Into<PathBuf>) -> Schema {
-        let test_schema_path = PathBuf::from("../../cynic-querygen/tests/schemas");
+        let test_schema_path = PathBuf::from("../../cynic-querygen/tests/schemas/");
         let path = test_schema_path.join(path.into());
         Schema {
             query_url: query_url.into(),
