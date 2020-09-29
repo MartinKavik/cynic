@@ -100,7 +100,7 @@ mod queries {
         argument_struct = "PullRequestTitlesArguments"
     )]
     pub struct Repository {
-        #[arguments(order_by = &args.pr_order, first = 10)]
+        #[arguments(order_by = args.pr_order, first = 10)]
         pub pull_requests: PullRequestConnection,
     }
 

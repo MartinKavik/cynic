@@ -48,17 +48,23 @@ macro_rules! define_into_argument_for_scalar {
 
 macro_rules! define_into_argument_for_option_refs {
     ($inner:ty) => {
-        impl $crate::IntoArgument<Option<$inner>> for Option<&$inner> {
-            fn into_argument(self) -> Option<$inner> {
-                self.cloned()
-            }
-        }
+        // impl $crate::IntoArgument<Option<$inner>> for Option<$inner> {
+        //     fn into_argument(self) -> Option<$inner> {
+        //         self.cloned()
+        //     }
+        // }
 
-        impl $crate::IntoArgument<Option<$inner>> for &Option<$inner> {
-            fn into_argument(self) -> Option<$inner> {
-                self.clone()
-            }
-        }
+        // impl $crate::IntoArgument<Option<$inner>> for Option<&$inner> {
+        //     fn into_argument(self) -> Option<$inner> {
+        //         self.cloned()
+        //     }
+        // }
+
+        // impl $crate::IntoArgument<Option<$inner>> for &Option<$inner> {
+        //     fn into_argument(self) -> Option<$inner> {
+        //         self.clone()
+        //     }
+        // }
     };
 }
 

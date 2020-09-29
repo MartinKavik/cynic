@@ -26,15 +26,16 @@ impl<'a> ValueExt for Value<'a, &'a str> {
     ) -> Result<String, Error> {
         Ok(match self {
             Value::Variable(name) => {
-                if input_value.value_type.is_required() {
-                    // Required arguments don't currently go through IntoArgument, so we need
-                    // to manually clone them.
-                    format!("args.{}.clone()", name.to_snake_case())
-                } else {
-                    // Optional types go thorugh IntoArgument so we can take a reference
-                    // and trust IntoArgument to convert it to whatever we need.
-                    format!("&args.{}", name.to_snake_case())
-                }
+                format!("args.{}", name.to_snake_case())
+                // if input_value.value_type.is_required() {
+                //     // Required arguments don't currently go through IntoArgument, so we need
+                //     // to manually clone them.
+                //     format!("args.{}", name.to_snake_case())
+                // } else {
+                //     // Optional types go thorugh IntoArgument so we can take a reference
+                //     // and trust IntoArgument to convert it to whatever we need.
+                //     format!("&args.{}", name.to_snake_case())
+                // }
             }
             Value::Int(num) => num.as_i64().unwrap().to_string(),
             Value::Float(num) => num.to_string(),
